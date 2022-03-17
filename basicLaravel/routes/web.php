@@ -21,7 +21,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/category/all',[ CategoryController::class , 'Allcat'])->name('all.category');
+Route::get('/category/all',[ CategoryController::class , 'AllCat'])->name('all.category');
+Route::post('/category/add',[ CategoryController::class , 'AddCat'])->name('store.category');
+Route::get('/category/edit/{id}', [CategoryController::class, 'Edit']);
+Route::post('/category/update/{id}', [CategoryController::class, 'Update']);
+Route::get('/softdelete/category/{id}', [CategoryController::class, 'SoftDelete']);
+
+Route::get('/category/restore/{id}', [CategoryController::class, 'Restore']);
+Route::get('/pdelete/category/{id}', [CategoryController::class, 'Pdelete']);
 Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     
     Route::get('/productos', Productos::class);
