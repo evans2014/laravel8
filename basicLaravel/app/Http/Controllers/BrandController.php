@@ -11,6 +11,10 @@ use Auth;
 
 class BrandController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function AllBrand(){
 
         $brands = Brand::latest()->paginate(5);
@@ -37,6 +41,7 @@ class BrandController extends Controller
  
         Brand::insert([
             'brand_name' => $request->brand_name,
+            'brand_description' => $request->brand_description,
             'brand_image' => $last_img,
             'created_at' => Carbon::now()
         ]);
@@ -82,6 +87,7 @@ class BrandController extends Controller
         unlink($old_image);
         Brand::find($id)->update([
             'brand_name' => $request->brand_name,
+            'brand_description' => $request->brand_description,            
             'brand_image' => $last_img,
             'created_at' => Carbon::now()
         ]);
@@ -95,6 +101,7 @@ class BrandController extends Controller
         }else{
             Brand::find($id)->update([
                 'brand_name' => $request->brand_name,
+                'brand_description' => $request->brand_description,
                 'created_at' => Carbon::now()
             ]);
             $notification = array(
@@ -143,13 +150,13 @@ class BrandController extends Controller
         ]);
             } // end of the foreach
 
-
-
-            return Redirect()->back()->with('success','Brand Inserted Successfully');
-
- 
+            return Redirect()->back()->with('success','Brand Inserted Successfully'); 
      }
 
+     public function Logout(){
+        Auth::logout();
+        return Redirect()->route('login')->with('success','User Logout');
+    }
 
  
 }

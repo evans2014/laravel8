@@ -46,7 +46,7 @@ class Productos extends Component
     public function borrar($id)
     {
         Producto::find($id)->delete();
-        session()->flash('message', 'Registro eliminado correctamente');
+        session()->flash('message', 'Record deleted successfully');
     }
 
     public function guardar()
@@ -58,7 +58,7 @@ class Productos extends Component
             ]);
          
          session()->flash('message',
-            $this->id_producto ? '¡Actualización exitosa!' : '¡Alta Exitosa!');
+            $this->id_producto ? 'Successful update!' : 'High Successful!');
          
          $this->cerrarModal();
          $this->limpiarCampos();
