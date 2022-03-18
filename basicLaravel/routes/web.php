@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Productos;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
 use App\Models\Multipic;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -80,3 +82,19 @@ Route::post('/store/About', [AboutController::class, 'StoreAbout'])->name('store
 Route::get('/about/edit/{id}', [AboutController::class, 'EditAbout']);
 Route::post('/update/homeabout/{id}', [AboutController::class, 'UpdateAbout']);
 Route::get('/about/delete/{id}', [AboutController::class, 'DeleteAbout']);
+
+//Portfolio Page Route
+Route::get('/portfolio', [AboutController::class, 'Portfolio'])->name('portfolio');
+
+// Amdin Contact Page Route 
+Route::get('/admin/contact', [ContactController::class, 'AdminContact'])->name('admin.contact');
+Route::get('/admin/add/contact', [ContactController::class, 'AdminAddContact'])->name('add.contact');
+Route::get('/contact/edit/{id}', [ContactController::class, 'AdminEditContact'])->name('edit.contact');
+Route::post('/admin/store/contact', [ContactController::class, 'AdminStoreContact'])->name('store.contact');
+Route::post('/update/contact/{id}', [ContactController::class, 'AdminUpdateContact']);
+Route::get('/contact/delete/{id}', [ContactController::class, 'AdminDeleteContact']);
+/// Home Contact Page Route 
+Route::get('/contact', [ContactController::class, 'Contact'])->name('contact');
+Route::post('/contact/form', [ContactController::class, 'ContactForm'])->name('contact.form');
+Route::get('/message/delete/{id}', [ContactController::class, 'AdminDeleteContactForm']);
+Route::get('/admin/message', [ContactController::class, 'AdminMessage'])->name('admin.message');
