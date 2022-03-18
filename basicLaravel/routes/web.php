@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Productos;
+//use App\Http\Livewire\Productos;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ChangePass;
 use App\Models\Multipic;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -55,7 +56,7 @@ Route::post('/multi/add', [BrandController::class, 'StoreImg'])->name('store.ima
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     
-    Route::get('/productos', Productos::class);
+    //Route::get('/productos', Productos::class);
     Route::get('/dashboard', function(){
         $users = DB::table('users')->get();
         //$users = User::all();
@@ -98,3 +99,11 @@ Route::get('/contact', [ContactController::class, 'Contact'])->name('contact');
 Route::post('/contact/form', [ContactController::class, 'ContactForm'])->name('contact.form');
 Route::get('/message/delete/{id}', [ContactController::class, 'AdminDeleteContactForm']);
 Route::get('/admin/message', [ContactController::class, 'AdminMessage'])->name('admin.message');
+
+/// Chanage Password and user Profile Route 
+Route::get('/user/password', [ChangePass::class, 'CPassword'])->name('change.password');
+Route::post('/password/update', [ChangePass::class, 'UpdatePassword'])->name('password.update');
+
+// User Profile 
+Route::get('/user/profile', [ChangePass::class, 'PUpdate'])->name('profile.update');
+Route::post('/user/profile/update', [ChangePass::class, 'UpdateProfile'])->name('update.user.profile');
