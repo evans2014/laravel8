@@ -25,7 +25,7 @@ Route::get('/', function () {
     $brands = DB::table('brands')->get();
     $abouts = DB::table('home_abouts')->first();
     $images = Multipic::all();
-    return view('home', compact('brands'));
+    return view('home', compact('brands','abouts','images'));
 });
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
